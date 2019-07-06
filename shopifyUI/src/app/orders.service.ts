@@ -10,13 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class OrdersService {
   private headers: HttpHeaders = new HttpHeaders();
+  private fetchServiceUrl = `http://localhost:3000/api/v1/order/fetch`;
+  private updateServiceUrl = `http://localhost:3000/api/v1/order/update`;
   constructor(public _http: HttpClient) {
     this.headers.append('Content-Type', 'application/json');
   }
 
 
   fetchOrders(): Observable<any> {
-    return this._http.get(`https://bharosaa.tk/api/v1/order/fetch`, { headers: this.headers });
+    return this._http.get(`${this.fetchServiceUrl}`, { headers: this.headers });
   }
 
   updateOrder(data) {
@@ -24,6 +26,6 @@ export class OrdersService {
       email: data.email,
       phone: data.phone
     }
-    return this._http.put(`https://bharosaa.tk/api/v1/order/update/${data.id}`, obj , {headers: this.headers});
+    return this._http.put(`${this.updateServiceUrl}/${data.id}`, obj , {headers: this.headers});
   }
 }
