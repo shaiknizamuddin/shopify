@@ -10,8 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class OrdersService {
   private headers: HttpHeaders = new HttpHeaders();
-  private fetchServiceUrl = `http://localhost:3000/api/v1/order/fetch`;
-  private updateServiceUrl = `http://localhost:3000/api/v1/order/update`;
+  private fetchServiceUrl = `http://localhost:3000/api/v1/order/fetch`; // replace localhost:3000 with domain name
+  private updateServiceUrl = `http://localhost:3000/api/v1/order/update`; // replace localhost:3000 with domain name
   constructor(public _http: HttpClient) {
     this.headers.append('Content-Type', 'application/json');
   }
