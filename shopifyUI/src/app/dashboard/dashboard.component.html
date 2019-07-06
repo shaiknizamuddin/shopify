@@ -1,0 +1,76 @@
+<div class="container">
+  <br>
+  <h3>Orders Dashboard</h3>
+  <hr>
+  <div class="row">
+
+    <div class="col-2">
+    </div>
+    <div class="col-6">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Items (quantity)</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orders; let i= index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{order.order.email}}</td>
+            <td>{{order.order.phone}}</td>
+            <td>
+              <span *ngFor="let item of order.order.line_items"> {{item.title}} - {{item.quantity}} </span>
+            </td>
+            <td (click)="editOrder(order)" data-toggle="modal" data-target="#exampleModalCenter" class="edit">Edit</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Edit Email / Phone</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-row">
+                  <input type="hidden" [(ngModel)]="orderObj.id" name="id">
+                  <div class="col-6">
+                    <input type="text" class="form-control" placeholder="Email" [(ngModel)]="orderObj.email"
+                      name="email">
+                  </div>
+                  <div class="col-6">
+                    <input type="text" class="form-control" placeholder="Phone" [(ngModel)]="orderObj.phone"
+                      name="phone">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" #closeModel>Close</button>
+              <button type="button" class="btn btn-primary" (click)="updateOrder()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="alert alert-success" role="alert" *ngIf="showAlert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
